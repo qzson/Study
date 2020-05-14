@@ -19,7 +19,9 @@ model.add(Dense(500))
 model.add(Dense(1))
 
 # 3. 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['acc'])
+model.compile(loss='mse', optimizer='adam', metrics=['mse'])
+# metrics=['acc']는 진행되는 부분에 acc를 눈으로 보여주는 것
+# 회귀모델을 보고 싶은데 metrics=['acc']를 설정해놔서 잘못 된 것 / metrics=['mse']로 바꿔야함
 model.fit(x, y, epochs=30, batch_size=1)
 
 # 4. 평가, 예측
