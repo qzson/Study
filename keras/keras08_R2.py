@@ -44,21 +44,19 @@ print("RMSE : ", RMSE(y_test, y_predict))
 
 # R2 구하기
 from sklearn.metrics import r2_score
-# r2_y_predict = r2_score(y_test, y_predict) =
+# r2_y_predict = r2_score(y_test, y_predict) = 아래와 같음
 r2 = r2_score(y_test, y_predict)
 print("R2 : ", r2)
 
 # 결론 : R2는 RMSE 와 같은 보조지표와 같이 쓴다.
 
-# <keras09_R2_test에 계속> <과제 : R2를 음수가 아닌 0.5 이하로 줄이기>
-# 레이어는 인풋과 아웃풋을 포함 5개 이상(히든이 3개 이상), 히든레이어 노드는 레이어당 각각 최소 5개 이상
-# batch_size = 1
-# epochs = 100 이상
-# 데이터 조작 하지말아라
-
 '''
-
-이번에는 강제로 나쁜 모델을 만들어야한다
-이 조건을 갖춘 상황에서 R2 스코어가 0.5 이하로 나와야 한다.
-
+R2 or R^2 : R Squared, 결정계수
+: (q1 - q2)/q1
+q1 = 전체 데이터들의 편차의 제곱
+q2 = 전체 데이터들의 잔차의 제곱
+1에 가까울 수록 정확도가 높다
+다른 지표들과 함께 사용된다.
+https://jihongl.github.io/2017/09/16/Rsquared/
+r2의 이해 링크
 '''
