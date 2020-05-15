@@ -30,28 +30,29 @@ from keras.models import Sequential
 from keras.layers import Dense
 model = Sequential()
 
-model.add(Dense(10, input_dim = 3))
+model.add(Dense(10,input_dim=3))
+model.add(Dense(6666))
 model.add(Dense(10))
-model.add(Dense(444))
+model.add(Dense(6666))
 model.add(Dense(10))
+model.add(Dense(6666))
 model.add(Dense(10))
+model.add(Dense(6666))
 model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(444))
-model.add(Dense(10))
+model.add(Dense(6666))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
+model.add(Dense(1))
 model.add(Dense(1))
 
 # 3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
-model.fit(x_train, y_train, epochs=222, batch_size=8, verbose=3,
+model.fit(x_train, y_train, epochs=30, batch_size=8, verbose=2,
           validation_split=0.25)
 
 # 4. 평가, 예측
