@@ -1,4 +1,4 @@
-# 200519 10:45 ~ <하이퍼 파라미터 튜닝>
+# 200519 10:45 ~ < 하이퍼 파라미터 튜닝 : RMSE = 0.053, R2 = 0.999996 >
 
 # 1. 데이터
 import numpy as np
@@ -70,7 +70,7 @@ model.summary()
 # 3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 model.fit([x1_train, x2_train],
-          y1_train, epochs=150, batch_size=2,
+          y1_train, epochs=50, batch_size=2,
           validation_split=0.25, verbose=2)
 
 
