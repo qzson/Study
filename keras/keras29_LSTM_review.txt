@@ -1,0 +1,45 @@
+DNN,CNN,RNN
+
+DNN(ANN) : Deep(Artificial) Neural Networks, 심층(인공) 신경망
+CNN      : Convolutional                   , 합성곱 신경망
+RNN      : Recurrent                       , 순환 신경망
+
+< RNN (Recurrent Neural Networks, 순환 신경망) >
+숫자가 반복된다.
+X = 1,2,3,4,5,6,7,8,9,10          -> Y = 11
+X = 11,12,13,14,15,16,17,18,18,19 -> Y = 21
+X = 10           ~            100 -> Y = 110
+삼성전자 주가 = 1.1     ~     1.10 -> 1.11
+             = 30      ~      500 -> ?
+
+시간에 따른 연속된 데이터로 분석해 예측값을 알아낸다.
+한글 : 시계열 // 영어 : Time series
+
+우리들의 월급, 로또의 번호, ...
+도박사의 오류 : 동전 던지기 10회 중 9회가 '앞' 10회는? '앞?, 뒤?'
+연속된 데이터 + 범위가 정해져 있다면, 가능할 수도 있다고 짐작 가능 (로또의 경우)
+> 공의 모양, 무게 등의 이런 변수들이 변하지 않았다면... But, 도박사의 오류에 노출될 위험이 있다.
+> But, 바뀌는 부분이 많다. 기계, 공...등 (첫번째 환경과 다음번 환경이 다르기 때문)
+
+RNN의 가장 대표적인 애 : LSTM
+(참고 : https://dgkim5360.tistory.com/entry/understanding-long-short-term-memory-lstm-kr)
+
+
+< LSTM (Long Short-Term Memory) >
+
+머신러닝 역사
+    이전 머신러닝    |        요즘 딥러닝
+RF    ->    XGB     | TF(어려워) -> Keras(+TF2.0)
+  레거시(속도 빠름)
+
+RNN 지원 (SIMPLE_RNN, GRU, LSTM, ... 등이 있다.)
+Simple_RNN : 그냥 RNN
+GRU        : 국뽕
+LSTM       : 성능이 좋아 많이 쓰인다.
+
+--- LSTM ---
+시퀀셜 모델 기준
+기존    : model.add(Dense())
+LSTM    : model.add(LSTM())
+
+200520 14:11 ~
