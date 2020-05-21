@@ -1,3 +1,5 @@
+# 200520
+
 from numpy import array
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
@@ -48,9 +50,9 @@ x_input = x_input.reshape(1,3,1)    # (3, )
 # 1,3,1 중에 3,1은 인풋 쉐이프 3,1 맞춰주고 앞의 1은 와꾸 맞추기 위해서
 # 와꾸가 안맞음--->(1,3,1)로 변환 (행, 열, 몇개로 쪼갤건지)
 
-
 print(x_input)
 
+# 4. 예측
 yhat = model.predict(x_input)
 print(yhat)
 # 정확하게 예측이 안된다. LSTM너무 적어서 , 수정할 수 있는 부분 수정
