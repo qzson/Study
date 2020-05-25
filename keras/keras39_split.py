@@ -10,7 +10,7 @@ def split_x(seq, size):
     aaa = []        # 는 리스트
     for i in range(len(seq) - size + 1):
         subset = seq[i : (i+size)]
-        aaa.append([item for item in subset]) # item for item in subset = 굳이 안넣고 subset 하면 간단.
+        aaa.append([item for item in subset]) # item for item in subset = 굳이 안넣고 subset 하면 간단. (대괄호 지우고)
     print(type(aaa))
     return np.array(aaa)
 
