@@ -29,7 +29,7 @@ model.add(Conv2D(10, (2,2), input_shape=(10,10,1)))       # (9, 9, 10)
  
  activation           : 활성화 함수 설정.
  - ‘linear’           : 입력뉴런과 가중치로 계산된 결과값이 그대로 출력으로 나옴.
- - ‘relu’             : rectifier 함수, 은낙층에 주로 쓰임.
+ - ‘relu’             : rectifier 함수, 은닉층에 주로 쓰임.
  - ‘sigmoid’          : 이진 분류 문제에서 출력층에 주로 쓰임.
  - ‘softmax’          : 다중 클래스 분류 문제에서 출력층에 주로 쓰임.
  https://tykimos.github.io/2017/01/27/CNN_Layer_Talk/
@@ -77,13 +77,17 @@ model.summary()
  conv2d_3 (Conv2D)            (None, 7, 7, 5)           145
  =================================================================
  
- 1. 10 10 10 에서 9 8 7 이 되는 이유 = 손 코딩, 그려서 확인
+ 10 10 10 에서 9 8 7 이 되는 이유 = 손 코딩, 그려서 확인
  
  파라미터 개수 계산 공식
- [i * (f * f) * o] + o
+
+ 1. [i * (f * f) * o] + o (이 방법은 보류)
  i : input
  f : kernal
- o : output '''
+ o : output 
+
+ 2. cnn param = (input * karnal * kernal + bias) output
+ 3. dense param = (input + bias) * output '''
 
 ''' Maxpooling 기능
  이미지 중에서 가장 큰 값만 추출해내는 것 '''
