@@ -1,7 +1,7 @@
 ''' 200526 CNN 1200~ 1400~ 1500~ 1600~
  이미지와 관련된 뉴럴 네트워크 '''
 
-''' 과제3
+''' 과제3 (완)
  summary 파라미터 개수 '''
 
 from keras.models import Sequential
