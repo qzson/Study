@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from keras.datasets import mnist                          # keras에서 제공되는 예제 파일 
 
@@ -15,11 +14,6 @@ print(x_test.shape)                                       # (10000, 28, 28)
 print(y_train.shape)                                      # (60000,)        : 10000개의 xcalar를 가진 vector(1차원)
 print(y_test.shape)                                       # (10000,)
 
-
-print(x_train[0].shape)                                   # (28, 28)
-# plt.imshow(x_train[0], 'gray')                          # '2차원'을 집어넣어주면 수치화된 것을 이미지로 볼 수 있도록 해줌    
-# plt.imshow(x_train[0])                                  # 색깔로 나옴
-# plt.show()                                              # 그림으로 보여주기
 
 
 # 데이터 전처리 1. 원핫인코딩 : 당연하다              => y 값  
@@ -41,8 +35,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Flatten, MaxPooling2D
 from keras.layers import Dropout                   
 """
-# Dropout : random 하게 지정한 ' % '만큼의 노드를 탈락시킨다.(overfitting 방지 가능)
-: node의 숫자를 직접 줄이는 것과 동일하지만 dropout이 조금더 좋다고 한다.
+# Dropout 
+: random 하게 지정한 ' % '만큼의 노드를 탈락시킨다.(overfitting 방지 가능)
+: node의 숫자를 직접 줄이는 것과 동일하지만 dropout이 조금 더 좋다고 한다.
 """
 
 model = Sequential()
@@ -62,30 +57,27 @@ model.add(Conv2D(40, (2, 2),padding = 'same'))
 model.add(Dropout(0.3))                                             # Dropout 사용
 
 model.add(Conv2D(20, (2, 2),padding = 'same'))
+model.add(Dropout(0.3))                                             # Dropout 사용
+
 model.add(Conv2D(10, (2, 2), padding='same'))
 model.add(Flatten())
 model.add(Dense(10, activation='softmax'))               
 
 model.summary()
 
+# EarlyStopping
+from keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor = 'val_loss', patience = 50, mode = 'auto', verbose = 1)
 
 #3. 훈련                     
 model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics= ['acc']) 
-hist = model.fit(x_train, y_train, epochs= 10, batch_size= 512, 
-                 validation_split=0.2, verbose = 1)
+model.fit(x_train, y_train, epochs= 100, batch_size= 64, verbose = 2,
+                 validation_split=0.2,
+                 callbacks = [es] )
 
-plt.plot(hist.history['loss'])                      # 'loss'값을 y로 넣겠다./ 하나만 쓰면 y 값으로 들어감
-plt.plot(hist.history['val_loss'])                  # 시간에 따른 loss, acc여서 x 값으로는 자연스럽게 epoch가 들어감
-plt.plot(hist.history['acc']) 
-plt.plot(hist.history['val_acc']) 
-plt.title('loss & acc')
-plt.ylabel('loss, acc')
-plt.xlabel('epoch')
-plt.legend(['train loss','val loss','train acc','val acc'])    # 선에 대한 색깔과 설명이 나옴
-plt.show()             
+
 
 #4. 평가
-loss, acc = model.evaluate(x_test, y_test, batch_size= 512)
+loss, acc = model.evaluate(x_test, y_test, batch_size= 64)
 print('loss: ', loss)
 print('acc: ', acc)
-
