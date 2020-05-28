@@ -69,7 +69,7 @@ model.summary()
 
 # 3. 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-hist = model.fit(x_train, y_train, epochs=30, batch_size=64, verbose=1, validation_split=0.2)
+model.fit(x_train, y_train, epochs=30, batch_size=64, verbose=1, validation_split=0.2)
 
 
 # 4. 평가, 예측
