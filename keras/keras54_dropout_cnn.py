@@ -9,14 +9,9 @@
  acc : 0.9879000186920166
  rmsprop
 
- loss : 0.04563406388759613
- acc : 0.9861999750137329
- adam
-
  gpu epoch 30 / batch 64
- loss : 0.060283861718709524
- acc : 0.9884999990463257
-  '''
+ loss : 0.031908373312254844
+ acc : 0.9923999905586243 '''
 
 import numpy as np
 
@@ -50,15 +45,17 @@ from keras.layers import Dropout
 
 model = Sequential()
 model.add(Conv2D(10, (2,2), activation='relu', padding='same', input_shape=(28,28,1)))
+model.add(Conv2D(40, (2,2), activation='relu', padding='same'))
+model.add(Conv2D(70, (2,2), activation='relu', padding='same'))
 model.add(Dropout(0.2))
-model.add(Conv2D(25, (2,2), activation='relu', padding='same'))
 model.add(Conv2D(50, (2,2), activation='relu', padding='same'))
-model.add(Dropout(0.3))
-model.add(Conv2D(60, (2,2), activation='relu', padding='same'))
-model.add(Conv2D(30, (2,2), activation='relu', padding='same'))
-model.add(Dropout(0.2))
-model.add(Conv2D(20, (2,2), activation='relu', padding='same'))
+model.add(Conv2D(40, (2,2), activation='relu', padding='same'))
 model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(30, (2,2), activation='relu', padding='same'))
+model.add(Conv2D(20, (2,2), activation='relu', padding='same'))
+model.add(Conv2D(10, (2,2), activation='relu', padding='same'))
+model.add(Dropout(0.2))
+model.add(Conv2D(10, (2,2), activation='relu', padding='same'))
 model.add(Flatten())
 model.add(Dense(10, activation='softmax'))
 
