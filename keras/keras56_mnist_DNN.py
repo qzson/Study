@@ -1,4 +1,4 @@
-# 20-05-08_14 0900~
+# 20-05-28_14 0900~
 # keras54 pull
 # mnist DNN 으로 모델 구성
 # acc = 0.98 이상 결과 도출
@@ -43,7 +43,7 @@ from keras.layers import Dense
 from keras.layers import Dropout
 
 model = Sequential()
-model.add(Dense(50, activation='relu', input_dim= 784))
+model.add(Dense(50, activation='relu', input_dim = 784))
 model.add(Dense(100, activation='relu'))
 # model.add(Dropout(0.2))
 
