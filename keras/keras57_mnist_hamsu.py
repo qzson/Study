@@ -44,7 +44,7 @@ Conv1 = Conv2D(70, (2,2), activation='relu', padding='same', name='Conv3')(Conv1
 dp1 = Dropout(0.2)(Conv1)
 Conv1 = Conv2D(50, (2,2), activation='relu', padding='same', name='Conv4')(dp1)
 Conv1 = Conv2D(40, (2,2), activation='relu', padding='same', name='Conv5')(Conv1)
-mp1 = MaxPooling2D(2, 2)(Conv1)
+mp1 = MaxPooling2D(2,2)(Conv1)
 Conv1 = Conv2D(30, (2,2), activation='relu', padding='same', name='Conv6')(mp1)
 Conv1 = Conv2D(20, (2,2), activation='relu', padding='same', name='Conv7')(Conv1)
 Conv1 = Conv2D(10, (2,2), activation='relu', padding='same', name='Conv8')(Conv1)
