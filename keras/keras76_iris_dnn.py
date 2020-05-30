@@ -1,14 +1,27 @@
+# 20-05-30 / 토요일
+
+# 아이리스 DNN 모델 구성
+# 요노마는 꽃 3개를 분류하는 데이터 인가 보다
+# 그러므로 다중 분류 들어갈 것임
+
+
+### 1. 데이터
 import numpy as np
 from sklearn.datasets import load_iris
 
-dataset = load_iris()
-x = dataset.data
-y = dataset.target
+x, y = load_iris(return_X_y=True)
+
+# 데이터 load 선생님 방식. 근데 이상한 에러떠서 보류
+# dataset = load_iris()
+# x = dataset.data
+# y = dataset.target
+# print(x)
 
 print(x.shape) # (150, 4)
 print(y.shape) # (150,)
 
-###
+
+### PCA
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -24,7 +37,8 @@ x_pca = pca.transform(x_scaled)
 # print(x_pca)
 print(x_pca.shape)   #(150, 2)
 
-###
+
+### Train_Test_Split
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(
@@ -36,13 +50,15 @@ print(x_test.shape)  #(30, 2)
 print(y_train.shape) #(120,)
 print(y_test.shape)  #(30,)
 
-### 데이터 전처리 1. OneHotEncoding
+
+### OneHotEncoding
 from keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
 print(y_train.shape) #(120, 3)
 print(y_test.shape)  #(30, 3)
+
 
 ### 2. 모델
 from keras.models import Sequential
