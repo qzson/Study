@@ -4,17 +4,20 @@
 # numpy  : 자료형이 1개일 때
 
 
+# 보스턴 LSTM 구성
+
+
+### 1. 데이터
 import numpy as np
 from sklearn.datasets import load_boston
 
-dataset = load_boston()
-x = dataset.data
-y = dataset.target
+x, y = load_boston(return_X_y=True)
 
 print(x.shape) # (506, 13)
 print(y.shape) # (506,)
 
-###
+
+### PCA
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -30,7 +33,7 @@ x_pca = pca.transform(x_scaled)
 print(x_pca)
 
 
-###
+### Train_Test_Split
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(
@@ -42,8 +45,11 @@ print(x_test.shape)  #(102, 2)
 print(y_train.shape) #(404,)
 print(y_test.shape)  #(102,)
 
+
+# x.Reshape
 x_train = x_train.reshape(404, 2, 1)
 x_test = x_test.reshape(102, 2, 1)
+
 
 ### 2. 모델
 from keras.models import Sequential
@@ -64,7 +70,8 @@ model.add(Dense(1))
 
 model.summary()
 
-# EarlyStopping
+
+# EarlyStopping & ModelCheckpoint
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(monitor = 'loss', patience=100, mode = 'auto')
 
