@@ -45,17 +45,26 @@
  '''
 
 
+# 보스턴 DNN 구성
+
+
+### 1. 데이터
 import numpy as np
 from sklearn.datasets import load_boston
 
-dataset = load_boston()
-x = dataset.data
-y = dataset.target
+x, y = load_boston(return_X_y=True)
+
+# 데이터 load 선생님 방식. 근데 이상한 에러떠서 보류
+# dataset = load_boston()
+# x = dataset.data
+# y = dataset.target
+# print(x)
 
 print(x.shape) # (506, 13)
 print(y.shape) # (506,)
 
-###
+
+### PCA
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -72,7 +81,7 @@ print(x_pca)
 print(x_pca.shape)
 
 
-###
+### Train_Test_Split
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(
@@ -104,7 +113,8 @@ model.add(Dense(1))
 
 model.summary()
 
-# EarlyStopping
+
+# EarlyStopping & ModelCheckpoint
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(monitor = 'loss', patience=100, mode = 'auto')
 
