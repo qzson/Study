@@ -1,14 +1,21 @@
+# 20-05-30 / 토요일
+
+# 아이리스 CNN 모델 구성
+# 요노마는 꽃 3개를 분류하는 데이터 인가 보다
+# 그러므로 다중 분류 들어갈 것임
+
+
+### 1. 데이터
 import numpy as np
 from sklearn.datasets import load_iris
 
-dataset = load_iris()
-x = dataset.data
-y = dataset.target
+x, y = load_iris(return_X_y=True)
 
 print(x.shape) # (150, 4)
 print(y.shape) # (150,)
 
-###
+
+### PCA
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -24,7 +31,8 @@ x_pca = pca.transform(x_scaled)
 # print(x_pca)
 print(x_pca.shape)   #(150, 2)
 
-###
+
+### Train_Test_Split
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(
@@ -36,11 +44,13 @@ print(x_test.shape)  #(30, 2)
 print(y_train.shape) #(120,)
 print(y_test.shape)  #(30,)
 
-###
+
+### x.Reshape
 x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], 1, 1)
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], 1, 1)
 
-### 데이터 전처리 1. OneHotEncoding
+
+### OneHotEncoding
 from keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train)
