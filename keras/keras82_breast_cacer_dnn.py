@@ -1,5 +1,6 @@
 # 20-05-31 / 일요일
 
+# DNN 구성
 # 이건 이진 분류 같음
 
 
@@ -77,7 +78,7 @@ val_loss = hist.history['val_loss']
 acc = hist.history['acc']
 val_acc = hist.history['val_acc']
 
-epochs = range(1, len(acc) + 1)
+epochs = range(1, len(acc) + 1)     # x라벨 epochs 범위 설정
 plt.figure(figsize=(10,8.5))
 
 #1
@@ -99,7 +100,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Acc')
 plt.legend(loc='lower right')
 
-plt.subplots_adjust(hspace=0.25)
+plt.subplots_adjust(hspace=0.25)    # subplot 두 그래프간 수직 간격 조정
 plt.show()
 
 
