@@ -1,0 +1,6 @@
+## Ignore File ##
+
+*.h5
+*.hdf5
+data/*
+graph/*
