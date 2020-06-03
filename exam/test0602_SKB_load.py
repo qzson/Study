@@ -26,24 +26,7 @@ print(hite.shape)     # (508, 5)
 print(samsung.shape)  # (508, 1)
 
 # 데이터 구성 생각 (이상한 생각인 것 같다)
-'''
- DNN 앙상블로 구현할 거다
 
- 데이터
- x1, y1
- x2, y2 로 구성해야한다.
-
- x1 을 hite 전체 / y1 을 hite 시가
- x2 를 hite 전체 / y2 를 samsung 시가 로 구성하자.
-
- 두 개의 레이어에 대한 input 2개를 구성하고 병합 후, output 2개를 구성하자 예측값을 뽑아본다.
-
- ## 구성시 
- 총 508일차 / 4 = 127
- x= 3일씩, y = 그다음 4일차만 로 자르기 
- >>> 이 생각 문제 있음 이상한데 데이터 구성같음 '''
-# x1, y1 = hite 전체, hite 시가
-# x2, y2 = samsung 시가
 def split_xy3(dataset, time_steps, y_column):
    x, y = list(), list()
    for i in range(len(dataset)):
@@ -99,71 +82,11 @@ print(x2_test.shape)  # (101, 3)
 print(y2_train.shape) # (404, 1)
 print(y2_test.shape)  # (101, 1)
 
-print(x1_test[-1])
-
-
-### 2. 모델 ###
-from keras.models import Model
-from keras.layers import Dense, Input
-from keras.layers import Dropout
-
-# Input 1 #
-input1 = Input(shape=(15,))
-
-dense1_1 = Dense(100, name='dense1_1')(input1)
-dense1_1 = Dense(200, )(dense1_1)
-dense1_1 = Dense(500, )(dense1_1)
-dp1_1 = Dropout(0.2)(dense1_1)
-dense1_1 = Dense(200, )(dp1_1)
-dense1_1 = Dense(50, )(dense1_1)
-
-# Input 2 #
-input2 = Input(shape=(3,))
-
-dense2_1 = Dense(100, name='dense2_1')(input2)
-dense2_1 = Dense(200, )(dense2_1)
-dense2_1 = Dense(500, )(dense2_1)
-dp2_1 = Dropout(0.2)(dense2_1)
-dense2_1 = Dense(200, )(dp2_1)
-dense2_1 = Dense(50, )(dense2_1)
-
-# 병합 #
-from keras.layers.merge import concatenate
-merge1 = concatenate([dense1_1, dense2_1])
-
-middle1 = Dense(300, name='mid1')(merge1)
-middle1 = Dense(150)(middle1)
-output = Dense(1)(middle1)
-
-# 모델 명시 #
-model = Model(inputs=[input1, input2],
-              outputs=output)
-model.summary()
-
-
-### 3. 훈련
-model.compile(optimizer='adam', loss='mse', metrics=['mse'])
-
-##### EarlyStopping & Modelcheckpoint & Tensorboard
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-es = EarlyStopping(monitor='val_loss', patience=50, mode='auto')
-
-modelpath = './exam/test-{epoch:02d}-{val_loss:.4f}.hdf5'
-cp = ModelCheckpoint(filepath=modelpath, monitor='val_loss',
-                     save_best_only=True, save_weights_only=False)
-
-tb = TensorBoard(log_dir='graph', histogram_freq=0,
-                 write_graph=True, write_images=True)
-
-model.fit([x1_train, x2_train], y2_train,
-          epochs=300, batch_size=32, verbose=2,
-          validation_split=0.25,
-          callbacks=[es])
 
 # """ model 저장 """
 # model.save('./exam/test0602_SKB.h5')
-# from keras.models import load_model
-# model = load_model('./exam/test0602_SKB.h5')
+from keras.models import load_model
+model = load_model('./exam/test0602_SKB.h5')
 
 ### 4. 평가, 예측
 loss, mse = model.evaluate([x1_test, x2_test], y2_test,
