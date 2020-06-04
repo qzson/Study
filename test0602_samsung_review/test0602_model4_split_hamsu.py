@@ -107,5 +107,5 @@ size = 6            # 6일치씩 자르겠다
 
 samsung = samsung.reshape(samsung.shape[0],)# (509,)
 samsung = split_x(samsung, size)
-print(samsung.shape)                        # (504, 6, 1)
+print(samsung.shape)                        # (504, 6)
 print(samsung)
