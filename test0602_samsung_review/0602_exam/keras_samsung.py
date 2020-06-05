@@ -28,9 +28,9 @@ hitedt = pd.read_csv('./data/csv/hite.csv', index_col = 0, encoding='CP949', hea
 print(hitedt.shape)
 
 ssdt = samsungdt[1:509]
-# print(ssdt) # str
+print(ssdt.shape) # str
 htdt = hitedt[1:509]
-# print(htdt) # str
+print(htdt.shape) # str
 
 '''
 # samsung
