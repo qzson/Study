@@ -161,9 +161,9 @@ model.fit([x1_train, x2_train], y2_train,
           callbacks=[es])
 
 # """ model 저장 """
-# model.save('./exam/test0602_SKB.h5')
+# model.save('./test0602_samsung_review/0602_exam/test0602_SKB.h5')
 # from keras.models import load_model
-# model = load_model('./exam/test0602_SKB.h5')
+# model = load_model('./test0602_samsung_review/0602_exam/test0602_SKB.h5')
 
 ### 4. 평가, 예측
 loss, mse = model.evaluate([x1_test, x2_test], y2_test,
