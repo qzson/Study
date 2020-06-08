@@ -1,7 +1,7 @@
 # 20-06-08_20
 # 월요일 // 12:30 ~
 
-# cnn 구성
+# lstm 구성
 
 
 from keras.datasets import mnist
@@ -66,6 +66,7 @@ print('최적의 매개변수 :', search.best_params_)
 
 acc = search.score(x_test, y_test)
 print('최종 스코어 :', acc)
+
 
 # pinrt 값 (node : 128, 64, 32)
 # 최적의 매개변수 : {'optimizer': 'adadelta', 'drop': 0.1, 'batch_size': 10}
