@@ -24,10 +24,14 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, rando
 ''' 2. 모델 '''
 # model = SVC()
 
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
                                                                   # 전처리와 model이 한번에 돌아감
-pipe = Pipeline([("scaler", MinMaxScaler()), ('svm', SVC())])     # 쓸 scaler와 model을 명시
+# pipe = Pipeline([("scaler", MinMaxScaler()), ('svm', SVC())])     # 쓸 scaler와 model을 명시
+pipe = make_pipeline(MinMaxScaler(), SVC())
+#   >> Pipeline 과 make_pipeline의 차이
+#   : 모델 앞에 명시의 차이 (' ',minmaxscaler...)
+
 
 pipe.fit(x_train, y_train)
 
