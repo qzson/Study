@@ -4,5 +4,6 @@
 *.hdf5
 *.ipynb
 *.csv
+*.jpg
 data/*
 graph/*
