@@ -46,11 +46,11 @@ print(y.shape) # (200, 4)
 ### 데이터 train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
 xy = (x_train, x_test, y_train, y_test)
-# np.save('./project/mini/data/multi_image_data.npy', xy)
-
 print(x_train.shape)
 print(x_test.shape)
 print(y_train.shape)
 print(y_test.shape)
 
+### 데이터 SAVE
+# np.save('./project/mini/data/multi_image_data.npy', xy)
 print('ok', len(y))
