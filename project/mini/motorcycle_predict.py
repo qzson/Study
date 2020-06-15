@@ -28,7 +28,7 @@ for i, f in enumerate(files):
 x_pred = np.array(X)
 
 ### modelcheckpint Load
-model = load_model('./project/mini/checkpoint/cp-10-0.0935.hdf5')
+model = load_model('./project/mini/checkpoint/mcp-10-0.0935.hdf5')
 
 ### 예측
 y_pred = model.predict(x_pred)
