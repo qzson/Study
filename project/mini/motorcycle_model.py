@@ -49,7 +49,7 @@ modelpath = './project/mini/checkpoint/cp-{epoch:02d}-{val_loss:.4f}.hdf5'
 cp = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True, save_weights_only=False)
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-hist = model.fit(x_train, y_train, epochs=40, batch_size=8, verbose=1, validation_split=0.2, callbacks=[es])
+hist = model.fit(x_train, y_train, epochs=40, batch_size=8, verbose=1, validation_split=0.2,callbacks=[es, cp])
 
 
 ''' 4. 평가 '''
