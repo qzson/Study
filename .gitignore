@@ -6,5 +6,6 @@
 *.csv
 *.jpg
 *.npy
+*.png
 data/*
 graph/*
