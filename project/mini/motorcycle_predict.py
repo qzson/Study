@@ -4,7 +4,7 @@ from PIL import Image
 import os, glob, numpy as np
 from keras.models import load_model
 
-## predict 이미지 불러오기
+### predict 이미지 불러오기
 caltech_dir = './project/mini/images/pred'
 
 image_w = 100
@@ -12,7 +12,7 @@ image_h = 100
 
 pixels = image_w * image_h * 3
 
-## pred 이미지를 Data 변환
+### pred 이미지를 Data 변환
 X = []
 filenames = []
 
@@ -27,10 +27,10 @@ for i, f in enumerate(files):
 
 x_pred = np.array(X)
 
-## modelcheckpint Load
+### modelcheckpint Load
 model = load_model('./project/mini/checkpoint/cp-10-0.0935.hdf5')
 
-## 예측
+### 예측
 y_pred = model.predict(x_pred)
 np.set_printoptions(formatter={'float': lambda x: '{0:0.3f}'.format(x)})
 cnt = 0
