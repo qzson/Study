@@ -35,12 +35,12 @@ for i in y_pred:
     print(i)
     print(pre_ans)
     pre_ans_str = ''
-    if pre_ans == 0: pre_ans_str = '스쿠터'
-    elif pre_ans == 1: pre_ans_str = '수퍼스포츠'
-    elif pre_ans == 2: pre_ans_str = '멀티퍼포스'
-    else: pre_ans_str = '크루저'
-    if i[0] >= 0.8 : print('해당' + filenames[cnt].split('\\')[1] + '이미지는' + pre_ans_str + '로 추정됩니다.')
-    if i[1] >= 0.8 : print('해당' + filenames[cnt].split('\\')[1] + '이미지는' + pre_ans_str + '로 추정됩니다.')
-    if i[2] >= 0.8 : print('해당' + filenames[cnt].split('\\')[1] + '이미지는' + pre_ans_str + '로 추정됩니다.')
-    if i[3] >= 0.8 : print('해당' + filenames[cnt].split('\\')[1] + '이미지는' + pre_ans_str + '로 추정됩니다.')
+    if pre_ans == 0: pre_ans_str = '( 스쿠터 )'
+    elif pre_ans == 1: pre_ans_str = '( 수퍼스포츠 )'
+    elif pre_ans == 2: pre_ans_str = '( 멀티퍼포스 )'
+    else: pre_ans_str = '( 크루저 )'
+    if i[0] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[1] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[2] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[3] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
     cnt += 1
