@@ -1,9 +1,10 @@
-# Load 모델 & Predict
+# Load 모델 (modelcheckpoint) & Predict
 
 from PIL import Image
 import os, glob, numpy as np
 from keras.models import load_model
 
+## predict 이미지 불러오기
 caltech_dir = './project/mini/images/pred'
 
 image_w = 100
@@ -11,6 +12,7 @@ image_h = 100
 
 pixels = image_w * image_h * 3
 
+## pred 이미지를 Data 변환
 X = []
 filenames = []
 
@@ -24,16 +26,19 @@ for i, f in enumerate(files):
     X.append(data)
 
 x_pred = np.array(X)
+
+## modelcheckpint Load
 model = load_model('./project/mini/checkpoint/cp-10-0.0935.hdf5')
 
+## 예측
 y_pred = model.predict(x_pred)
 np.set_printoptions(formatter={'float': lambda x: '{0:0.3f}'.format(x)})
 cnt = 0
 
 for i in y_pred:
     pre_ans = i.argmax() # 예측 레이블
-    print(i)
-    print(pre_ans)
+    # print(i)
+    # print(pre_ans)
     pre_ans_str = ''
     if pre_ans == 0: pre_ans_str = '( 스쿠터 )'
     elif pre_ans == 1: pre_ans_str = '( 수퍼스포츠 )'
