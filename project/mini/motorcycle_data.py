@@ -35,7 +35,7 @@ for idx, cat in enumerate(categories):
         Y.append(label)
 
         if i % 700 == 0:
-            print(cat, ':', f)
+           print(cat, ':', f)
 
 x = np.array(X)
 y = np.array(Y)
