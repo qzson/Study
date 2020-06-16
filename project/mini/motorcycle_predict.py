@@ -10,8 +10,6 @@ caltech_dir = './project/mini/images/pred'
 image_w = 100
 image_h = 100
 
-pixels = image_w * image_h * 3
-
 ### pred 이미지를 Data 변환
 X = []
 filenames = []
@@ -32,7 +30,7 @@ model = load_model('./project/mini/checkpoint/mcp-22-0.0638.hdf5')
 
 ### 예측
 y_pred = model.predict(x_pred)
-np.set_printoptions(formatter={'float': lambda x: '{0:0.3f}'.format(x)})
+np.set_printoptions(formatter={'float': lambda x: '{0:0.2f}'.format(x)})
 cnt = 0
 
 for i in y_pred:
@@ -44,8 +42,8 @@ for i in y_pred:
     elif pre_ans == 1: pre_ans_str = '( 수퍼스포츠 )'
     elif pre_ans == 2: pre_ans_str = '( 멀티퍼포스 )'
     else: pre_ans_str = '( 크루저 )'
-    if i[0] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[1] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[2] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[3] >= 0.8 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[0] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[1] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[2] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
+    if i[3] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
     cnt += 1
