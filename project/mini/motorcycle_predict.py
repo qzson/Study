@@ -31,19 +31,19 @@ model = load_model('./project/mini/checkpoint/mcp-22-0.0638.hdf5')
 ### 예측
 y_pred = model.predict(x_pred)
 np.set_printoptions(formatter={'float': lambda x: '{0:0.2f}'.format(x)})
-cnt = 0
+cn = 0
 
 for i in y_pred:
-    pre_ans = i.argmax() # 예측 레이블
+    pre_idx = i.argmax() # 예측 레이블
     # print(i)
-    # print(pre_ans)
-    pre_ans_str = ''
-    if pre_ans == 0: pre_ans_str = '( 스쿠터 )'
-    elif pre_ans == 1: pre_ans_str = '( 수퍼스포츠 )'
-    elif pre_ans == 2: pre_ans_str = '( 멀티퍼포스 )'
-    else: pre_ans_str = '( 크루저 )'
-    if i[0] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[1] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[2] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    if i[3] >= 0.5 : print('해당 ' + filenames[cnt].split('\\')[1] + ' 이미지는 ' + pre_ans_str + ' 로 추정됩니다.')
-    cnt += 1
+    # print(pre_idx)
+    pre_idx_str = ''
+    if pre_idx == 0: pre_idx_str = '( 스쿠터 )'
+    elif pre_idx == 1: pre_idx_str = '( 수퍼스포츠 )'
+    elif pre_idx == 2: pre_idx_str = '( 멀티퍼포스 )'
+    else: pre_idx_str = '( 크루저 )'
+    if i[0] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
+    if i[1] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
+    if i[2] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
+    if i[3] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
+    cn += 1
