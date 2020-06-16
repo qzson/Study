@@ -33,7 +33,7 @@ model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Dropout(0.25))
 
 model.add(Flatten())
-model.add(Dense(256, activation='relu'))
+model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 
 model.add(Dense(nb_classes, activation='softmax'))
@@ -43,13 +43,13 @@ model.summary()
 
 ''' 3. 훈련 '''
 ## earlystopping & modelcheckpoint
-es = EarlyStopping(monitor='val_loss', patience=7, mode='auto')
+es = EarlyStopping(monitor='val_loss', patience=10, mode='auto')
 
 modelpath = './project/mini/checkpoint/cp-{epoch:02d}-{val_loss:.4f}.hdf5'
 cp = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True, save_weights_only=False)
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-hist = model.fit(x_train, y_train, epochs=40, batch_size=8, verbose=1, validation_split=0.2,callbacks=[es, cp])
+hist = model.fit(x_train, y_train, epochs=40, batch_size=8, verbose=2, validation_split=0.2,callbacks=[es, cp])
 
 
 ''' 4. 평가 '''
