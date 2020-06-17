@@ -34,16 +34,16 @@ np.set_printoptions(formatter={'float': lambda x: '{0:0.2f}'.format(x)})
 cn = 0
 
 for i in y_pred:
-    pre_idx = i.argmax() # 예측 레이블
+    p_idx = i.argmax() # 예측 레이블
     # print(i)
-    # print(pre_idx)
-    pre_idx_str = ''
-    if pre_idx == 0: pre_idx_str = '( 스쿠터 )'
-    elif pre_idx == 1: pre_idx_str = '( 수퍼스포츠 )'
-    elif pre_idx == 2: pre_idx_str = '( 멀티퍼포스 )'
-    else: pre_idx_str = '( 크루저 )'
-    if i[0] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
-    if i[1] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
-    if i[2] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
-    if i[3] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + pre_idx_str + ' 로 예측됩니다.')
+    # print(p_idx)
+    p_idx_str = ''
+    if p_idx == 0: p_idx_str = '( 스쿠터 )'
+    elif p_idx == 1: p_idx_str = '( 수퍼스포츠 )'
+    elif p_idx == 2: p_idx_str = '( 멀티퍼포스 )'
+    else: p_idx_str = '( 크루저 )'
+    if i[0] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + p_idx_str + ' 로 예측됩니다.')
+    if i[1] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + p_idx_str + ' 로 예측됩니다.')
+    if i[2] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + p_idx_str + ' 로 예측됩니다.')
+    if i[3] >= 0.5 : print(filenames[cn].split('\\')[1] + ' 의 모델은 ' + p_idx_str + ' 로 예측됩니다.')
     cn += 1
