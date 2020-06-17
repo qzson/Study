@@ -35,8 +35,8 @@ cn = 0
 
 for i in y_pred:
     p_idx = i.argmax() # 예측 레이블
-    # print(i)
-    # print(p_idx)
+    print(i)
+    print(p_idx)
     p_idx_str = ''
     if p_idx == 0: p_idx_str = '( 스쿠터 )'
     elif p_idx == 1: p_idx_str = '( 수퍼스포츠 )'
