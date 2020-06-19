@@ -1,6 +1,11 @@
 # 200619_24 금요일
 # 과적합 방지
 
+# 뭐의 중요성을 느꼈는가?
+# feature_importancce
+# feature 엔지니어링 이 중요할 수 있다.
+# XGB 트리 구조에 feature_importance가 들어간다
+
 # 1. 훈련데이터량을 늘린다.
 # 2. 피처수를 줄인다.
 # 3. regularization
