@@ -1,26 +1,19 @@
 # 200619_24 금요일
 # 과적합 방지
-
-# 뭐의 중요성을 느꼈는가?
-# feature_importancce
-# feature 엔지니어링 이 중요할 수 있다.
-# XGB 트리 구조에 feature_importance가 들어간다
-
 # 1. 훈련데이터량을 늘린다.
 # 2. 피처수를 줄인다.
+
 # 3. regularization
 #   >> 별로 효과가 없었다 (Dropout과 비슷? - 결과가 비슷)
 # feature를 xgb로 건드려 보겠다
+
 
 from xgboost import XGBClassifier, XGBRegressor, plot_importance
 from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-dataset = load_boston()
-x = dataset.data
-y = dataset.target
-
+x, y = load_boston(return_X_y=True)
 print(x.shape)      # (506, 13)
 print(y.shape)      # (506, )
 
@@ -29,6 +22,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size = 0.8,
 
 n_estimators = 150          # 트리가 100개
 learning_rate = 0.075       # 디폴트 0.01 // 가장 쎈놈 (딥러닝의 loss에 대한 떡밥)
+                            # 최소의 손실율을 구하기 위한 단위가 learning rate
 colsample_bytree = 0.9      # 디폴트 1 // 0.6 ~ 0.9 사용 // 얼마정도 컬럼을 샘플로 쓸건지
 colsample_bylevel = 0.6     # 
 
@@ -64,7 +58,7 @@ print(model.feature_importances_)
 
 plot_importance(model)
 # matplot에서 제공하는 것
-# plt.show()
+plt.show()
 
 # 이번시간 
 # param에 대해서 완벽한 정리를 해야한다.
