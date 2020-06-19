@@ -10,8 +10,9 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 
 cancer = load_breast_cancer()
+x, y = load_breast_cancer(return_X_y=True)
 x_train, x_test, y_train, y_test = train_test_split(
-    cancer.data, cancer.target, train_size=0.8, random_state=42
+    x, y, train_size=0.8, random_state=42
 )
 print(x_train.shape)    # (455, 30)
 print(x_test.shape)     # (114, 30)
@@ -37,7 +38,7 @@ print(acc)
 import matplotlib.pyplot as plt
 import numpy as np
 def plot_feature_importances_cancer(model):
-    n_features = cancer.data.shape[1]
+    n_features = x.shape[1]
     plt.barh(np.arange(n_features), model.feature_importances_, align='center')
     plt.yticks(np.arange(n_features), cancer.feature_names)
     plt.xlabel("Feature Importances")
