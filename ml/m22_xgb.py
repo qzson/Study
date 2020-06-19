@@ -27,10 +27,10 @@ print(y.shape)      # (506, )
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size = 0.8,
                  shuffle = True, random_state = 66)
 
-n_estimators = 100          # 트리가 100개
-learning_rate = 0.01        # 디폴트 0.01 // 가장 쎈놈 (딥러닝의 loss에 대한 떡밥)
+n_estimators = 150          # 트리가 100개
+learning_rate = 0.075       # 디폴트 0.01 // 가장 쎈놈 (딥러닝의 loss에 대한 떡밥)
 colsample_bytree = 0.9      # 디폴트 1 // 0.6 ~ 0.9 사용 // 얼마정도 컬럼을 샘플로 쓸건지
-colsample_bylevel = 0.9     # 
+colsample_bylevel = 0.6     # 
 
 max_depth = 5               # 큰 영향을 주지는 않는다
 n_jobs = -1
@@ -50,9 +50,10 @@ n_jobs = -1
 # feature importance 해야한다
 
 model = XGBRegressor(max_depth=max_depth, learning_rate=learning_rate,
-                      n_estimators=n_estimators, n_jobs=n_jobs,
-                      colsample_bylevel = colsample_bylevel,
-                      colsample_bytree = colsample_bytree)
+                     n_estimators=n_estimators, n_jobs=n_jobs,
+                     colsample_bylevel = colsample_bylevel,
+                     colsample_bytree = colsample_bytree)
+# model = XGBRegressor() # 디폴트로 돌릴 때
 
 model.fit(x_train, y_train)
 
@@ -63,7 +64,19 @@ print(model.feature_importances_)
 
 plot_importance(model)
 # matplot에서 제공하는 것
-plt.show()
+# plt.show()
 
 # 이번시간 
 # param에 대해서 완벽한 정리를 해야한다.
+
+# XGB Default
+# 점수 : 0.9221188544655419
+
+# learning_rate 0.07
+# 점수 : 0.9369225858652748
+
+# n_estimators = 150
+# learning_rate = 0.075
+# colsample_bytree = 0.9
+# colsample_bylevel = 0.6
+# 점수 : 0.9446478525465573
