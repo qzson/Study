@@ -38,12 +38,12 @@ print(acc)
 import matplotlib.pyplot as plt
 import numpy as np
 def plot_feature_importances_cancer(model):
-    n_features = x.shape[1]
-    plt.barh(np.arange(n_features), model.feature_importances_, align='center')
-    plt.yticks(np.arange(n_features), cancer.feature_names)
+    n_features = x.shape[1]                                                     # n_features : column 개수
+    plt.barh(np.arange(n_features), model.feature_importances_, align='center') # barh : 가로방향 bar chart
+    plt.yticks(np.arange(n_features), cancer.feature_names)                     # tick : 축상의 위치표시 지점
     plt.xlabel("Feature Importances")
     plt.ylabel("Features")
-    plt.ylim(-1, n_features)
+    plt.ylim(-1, n_features)                                                    # y축의 최솟값, 최댓값을 지정 / x는 xlim
 
 plot_feature_importances_cancer(model)
 plt.show()
