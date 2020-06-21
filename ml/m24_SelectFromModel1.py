@@ -54,6 +54,22 @@ for thresh in thresholds:                                               # 컬럼
 
     print('Thresh=%.3f, n=%d, R2: %.2f%%' %(thresh, select_x_train.shape[1], score*100.0))
 
+'''
+Thresh=0.001, n=13, R2: 92.21%
+Thresh=0.004, n=12, R2: 92.16%
+Thresh=0.012, n=11, R2: 92.03%
+Thresh=0.012, n=10, R2: 92.19%
+Thresh=0.014, n=9, R2: 93.08%
+Thresh=0.015, n=8, R2: 92.37%
+Thresh=0.018, n=7, R2: 91.48%
+Thresh=0.030, n=6, R2: 92.71%
+Thresh=0.042, n=5, R2: 91.74%
+Thresh=0.052, n=4, R2: 92.11%
+Thresh=0.069, n=3, R2: 92.52%
+Thresh=0.301, n=2, R2: 69.41%
+Thresh=0.428, n=1, R2: 44.98%
+'''
+
 # Thresh : feature_importance 값 // (중요도에 따라 쭉 나오는 것)
 # n=     : 중요도 제일 낮은 것을 뺀것 후 나머지
 # r2     : 93.08% , 9개로 했을때 좋았다
