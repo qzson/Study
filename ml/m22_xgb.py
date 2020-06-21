@@ -21,12 +21,12 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size = 0.8,
                  shuffle = True, random_state = 66)
 
 n_estimators = 150          # 트리가 100개
-learning_rate = 0.075       # 디폴트 0.01 // 가장 쎈놈 (딥러닝의 loss에 대한 떡밥)
+learning_rate = 0.075       # 첫시작시 0.01 로 값을 두고 천천히 튜닝해나간다 // 가장 쎈놈 (딥러닝의 loss에 대한 떡밥)
                             # 최소의 손실율을 구하기 위한 단위가 learning rate
-colsample_bytree = 0.9      # 디폴트 1 // 0.6 ~ 0.9 사용 // 얼마정도 컬럼을 샘플로 쓸건지
-colsample_bylevel = 0.6     # 
+colsample_bytree = 0.9      # 디폴트 1 // 개별 의사결정나무 모형에 사용될 변수 갯수를 지정 // 보통 0.5 ~ 1 사용 // 얼마정도 컬럼을 샘플로 쓸건지
+colsample_bylevel = 0.6     # 디폴트 1 // 이것은 추가로 지정하는 것이 의문이 든다?
 
-max_depth = 5               # 큰 영향을 주지는 않는다
+max_depth = 5               # 디폴트 6 // 과적합 방지를 위해 사용 // CV를 사용해서 적절한 값이 제시되어야함 // 보통 3 ~ 10 값이 적용된다 (max_leaf_nodes가 설정되면 max_depth는 무시된다)
 n_jobs = -1
 
 # 딥러닝이 아닐경우는 n_jobs 항상 -1을 사용해라
