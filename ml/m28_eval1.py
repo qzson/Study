@@ -28,6 +28,10 @@ model.fit(x_train, y_train, verbose=True, eval_metric=['logloss','rmse'],
                 eval_set=[(x_train, y_train), (x_test, y_test)],
                 early_stopping_rounds=20)
 
+# Stopping. Best iteration: [78]
+# validation_0-logloss:-791.72449 validation_0-rmse:0.57088
+# validation_1-logloss:-799.52972 validation_1-rmse:2.36899
+
 
 ### 평가 ###
 results = model.evals_result()
@@ -38,6 +42,9 @@ y_pred = model.predict(x_test)
 r2 = r2_score(y_pred, y_test)
 print('r2 Score:, %.2f%%' %(r2 * 100.0))
 print('r2 :', r2)
+
+# r2 Score:, 93.18%
+# r2 : 0.9317913267732658
 
 
 ### 시각화 ###
