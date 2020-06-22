@@ -9,6 +9,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_boston
 from sklearn.metrics import accuracy_score, r2_score
 
+
+### 데이터 ###
 x, y = load_boston(return_X_y=True)
 print(x.shape)      # (506, 13)
 print(y.shape)      # (506, )
