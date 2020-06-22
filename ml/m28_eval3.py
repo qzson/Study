@@ -28,6 +28,10 @@ model.fit(x_train, y_train, verbose=True, eval_metric=['mlogloss','merror'],
                 eval_set=[(x_train, y_train), (x_test, y_test)],
                 early_stopping_rounds=20)
 
+# Stopping. Best iteration: [0]
+# validation_0-mlogloss:0.97013   validation_0-merror:0.03333
+# validation_1-mlogloss:0.97191   validation_1-merror:0.00000
+
 
 ### 평가 ###
 results = model.evals_result()
@@ -38,6 +42,9 @@ y_pred = model.predict(x_test)
 acc = accuracy_score(y_pred, y_test)
 print('acc :, %.2f%%' %(acc * 100.0))
 print('acc :', acc)
+
+# acc :, 100.00%
+# acc : 1.0
 
 
 ### 시각화 ###
