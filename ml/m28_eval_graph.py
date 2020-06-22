@@ -37,7 +37,6 @@ import matplotlib.pyplot as plt
 epochs = len(results['validation_0']['logloss'])
 x_axis = range(0, epochs)
 
-# plt.subplot(2,1,1)
 fig, ax = plt.subplots()
 ax.plot(x_axis, results['validation_0']['logloss'], label='Train')
 ax.plot(x_axis, results['validation_1']['logloss'], label='Test')
@@ -53,5 +52,3 @@ ax.legend()
 plt.ylabel('RMSE')
 plt.title('XGBoost RMSE')
 plt.show()
-
-# rmse 부분에서 
