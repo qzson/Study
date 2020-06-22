@@ -51,5 +51,5 @@ xy = (x_train, x_test, y_train, y_test)
 # # print(y_test.shape)     # (40, 4)
 
 ### 데이터 SAVE
-# np.save('./project/mini/data/multi_image_data.npy', xy)
+np.save('./project/mini/data/multi_image_data.npy', xy)
 print('ok', len(y))
