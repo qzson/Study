@@ -28,6 +28,10 @@ model.fit(x_train, y_train, verbose=True, eval_metric=['logloss','error'],
                 eval_set=[(x_train, y_train), (x_test, y_test)],
                 early_stopping_rounds=20)
 
+# Stopping. Best iteration: [0]
+# validation_0-logloss:0.60761    validation_0-error:0.01758
+# validation_1-logloss:0.61300    validation_1-error:0.03509
+
 
 ### 평가 ###
 results = model.evals_result()
@@ -38,6 +42,9 @@ y_pred = model.predict(x_test)
 acc = accuracy_score(y_pred, y_test)
 print('acc :, %.2f%%' %(acc * 100.0))
 print('acc :', acc)
+
+# acc :, 96.49%
+# acc : 0.9649122807017544
 
 
 ### 시각화 ###
@@ -60,3 +67,4 @@ ax.legend()
 plt.ylabel('ERROR')
 plt.title('XGBoost ERROR')
 plt.show()
+
