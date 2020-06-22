@@ -7,5 +7,7 @@
 *.jpg
 *.npy
 *.png
+*.model
+*.dat
 data/*
 graph/*
