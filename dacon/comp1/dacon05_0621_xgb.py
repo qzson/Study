@@ -87,16 +87,18 @@ model.fit(x_train,y_train)
 for i in range(len(model.estimators_)):
     threshold = np.sort(model.estimators_[i].feature_importances_)
 
-    for median in threshold:
-        selection = SelectFromModel(model.estimators_[i], threshold=median, prefit=True)
+    for thresh in threshold:
+        selection = SelectFromModel(model.estimators_[i], threshold=thresh, prefit=True)
 
         param = {
-            'n_estimators': [100, 150, 200],
-            'learning_rate': [0.01, 0.05, 0.1],
-            'colsample_bytree': [0.5, 0.7, 0.9],
-            'max_depth': [3, 4, 5]
+            'n_estimators': [200],
+            'learning_rate': [0.7],
+            'max_depth': [10],
+            'colsample_bytree': [0.7],
+            'reg_alpha': [1],
+            'scale_pos_weight': [1]
         }
-        gridcv = RandomizedSearchCV(XGBRegressor(), param, cv=5, n_jobs = -1)
+        gridcv = RandomizedSearchCV(XGBRegressor(n_jobs = 6), param, cv=5, n_jobs = 6)
         
         select_x_train = selection.transform(x_train)
         selection_model = MultiOutputRegressor(gridcv)
@@ -107,15 +109,15 @@ for i in range(len(model.estimators_)):
         mae = mean_absolute_error(y_test, y_pred)
 
         score = r2_score(y_test, y_pred)
-        print('Median=%.3f, n=%d, R2: %.2f%%, MAE: %.3f' %(median, select_x_train.shape[1], score*100.0, mae))
+        print('thresh=%.3f, n=%d, R2: %.2f%%, MAE: %.3f' %(thresh, select_x_train.shape[1], score*100.0, mae))
         # print(gridcv.best_params_)
 
         select_x_pred = selection.transform(x_pred)
         y_predict = selection_model.predict(select_x_pred)
 
-        a = np.arange(10000,20000)
-        submission = pd.DataFrame(y_predict, a)
-        submission.to_csv('./data/dacon/comp1/sub_XG%d_%.5f.csv'%(i, mae),index = True, header=['hhb','hbo2','ca','na'],index_label='id')
+        # a = np.arange(10000,20000)
+        # submission = pd.DataFrame(y_predict, a)
+        # submission.to_csv('./data/dacon/comp1/sub_XG%d_%.5f.csv'%(i, mae),index = True, header=['hhb','hbo2','ca','na'],index_label='id')
     
 
 
