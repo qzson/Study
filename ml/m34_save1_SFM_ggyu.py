@@ -48,7 +48,6 @@ for thresh in thresholds:
     
     y_pred = model2.predict(select_x_test)
     score = r2_score(y_test, y_pred)
-    shape = select_x_train.shape
     models.append(model2)           # 모델을 배열에 저장
     print(thresh, score)
     res = np.append(res, score)     # 결과값을 전부 배열에 저장
