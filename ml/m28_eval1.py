@@ -21,7 +21,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size = 0.8,
 
 ### 모델 ###
 model = XGBRegressor(n_estimators=300, learning_rate=0.1)
-
+# XGBRegressor(gpu_id=0, tree_method='gpu_hist') # gpu 가동
 
 ### 훈련 ###
 model.fit(x_train, y_train, verbose=True, eval_metric=['logloss','rmse'],
