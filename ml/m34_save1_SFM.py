@@ -52,7 +52,7 @@ for thresh in thresholds:
     score = r2_score(y_test, y_pred)
 
     print('Thresh=%.3f, n=%d, R2: %.2f%%' %(thresh, select_x_train.shape[1], score*100.0))
-    model.save_model('./model/xgb_save/boston_n=%d_r2=%.3f.model' %(select_x_train.shape[1], score))
+    # model.save_model('./model/xgb_save/boston_n=%d_r2=%.3f.model' %(select_x_train.shape[1], score))
 
 # Thresh=0.001, n=13, R2: 93.29%
 # Thresh=0.002, n=12, R2: 93.25%
