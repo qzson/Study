@@ -9,5 +9,6 @@
 *.png
 *.model
 *.dat
+*.pyc
 data/*
 graph/*
