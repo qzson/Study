@@ -122,24 +122,33 @@ y_test4 = y_test[:, 3]
 print(y_train1.shape)
 
 model = LGBMRegressor(n_estimators=550,
-                      num_leaves=50,
-                      max_depth=8,
-                      min_child_samples=40,
-                      learning_rate=0.05,
+                      num_leaves=100,
+                      max_depth=20,
+                      min_child_samples=30,
+                      learning_rate=0.04,
                       colsample_bytree=0.7,
                       reg_alpha=1,
-                      scale_pos_weight=1,
                       reg_lambda = 1.1,
                       n_jobs=6)
+# 100 / 20 / 30 / 0.05 / 0.5
+# score1 : 72.3023
+# mae1 : 1.1604
+# score2 : 21.5578
+# mae2 : 0.6963
+# score3 : 25.3974
+# mae3 : 2.0771
+# score4 : 17.2373
+# mae4 : 1.3498
 
-# score1 : 71.6105
-# mae1 : 1.1795
-# score2 : 20.7020
-# mae2 : 0.7026
-# score3 : 24.3928
-# mae3 : 2.0927
-# score4 : 15.0422
-# mae4 : 1.3709
+# 100 / 20 / 30 / 0.04 / 0.7
+# score1 : 72.2789
+# mae1 : 1.1567
+# score2 : 22.8805
+# mae2 : 0.6918
+# score3 : 26.0999
+# mae3 : 2.0683
+# score4 : 17.5051
+# mae4 : 1.3463
 
 model.fit(x_train, y_train1, verbose=False, eval_metric=['logloss'],
                 eval_set=[(x_test, y_test1)],
@@ -203,4 +212,4 @@ sub = pd.DataFrame({
 print(sub)
 
 ''' 4. 저장 '''
-sub.to_csv('./data/dacon/comp1/sub_lgbm_01.csv', index=False)
+sub.to_csv('./data/dacon/comp1/KB_lgbm_02.csv', index=False)
