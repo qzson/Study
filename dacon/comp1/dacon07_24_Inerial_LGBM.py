@@ -106,7 +106,6 @@ mae1 = mean_absolute_error(y_test1, y_pred_1)
 print('mae1 : %.4f' %(mae1))
 y_pred1 = model.predict(x_pred)
 
-
 model.fit(x_train, y_train2, verbose=False, eval_metric=['logloss'],
                 eval_set=[(x_test, y_test2)],
                 early_stopping_rounds=20)
