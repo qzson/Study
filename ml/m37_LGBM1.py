@@ -60,23 +60,6 @@ for thresh in thresholds:
     print('Thresh=%.3f, n=%d, R2: %.2f%%' %(thresh, select_x_train.shape[1], score*100.0))
     # model.save_model('./model/xgb_save/boston_n=%d_r2=%.3f.model' %(select_x_train.shape[1], score))
 
-def get_clf_eval(y_test, y_pred):
-    confusion = confusion_matrix(y_test, y_pred)
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred)
-    recall = recall_score(y_test, y_pred)
-    F1 = f1_score(y_test, y_pred)
-    AUC = roc_auc_score(y_test, y_pred)
-    print('오차행렬:\n', confusion)
-    print('\n정확도: {:.4f}'.format(accuracy))
-    print('정밀도: {:.4f}'.format(precision))
-    print('재현율: {:.4f}'.format(recall))
-    print('F1: {:.4f}'.format(F1))
-    print('AUC: {:.4f}'.format(AUC))
-
-get_clf_eval(y_test, y_pred)
-
-
 # Thresh=16.000, n=13, R2: 92.80%
 # Thresh=25.000, n=12, R2: 92.87%
 # Thresh=72.000, n=11, R2: 92.70%
