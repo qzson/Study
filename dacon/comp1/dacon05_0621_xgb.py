@@ -115,9 +115,9 @@ for i in range(len(model.estimators_)):
         select_x_pred = selection.transform(x_pred)
         y_predict = selection_model.predict(select_x_pred)
 
-        # a = np.arange(10000,20000)
-        # submission = pd.DataFrame(y_predict, a)
-        # submission.to_csv('./data/dacon/comp1/sub_XG%d_%.5f.csv'%(i, mae),index = True, header=['hhb','hbo2','ca','na'],index_label='id')
+        a = np.arange(10000,20000)
+        submission = pd.DataFrame(y_predict, a)
+        submission.to_csv('./data/dacon/comp1/kb_XG_%i_%.5f.csv' %(i, mae),index = True, header=['hhb','hbo2','ca','na'],index_label='id')
     
 
 
