@@ -10,5 +10,6 @@
 *.model
 *.dat
 *.pyc
+*.json
 data/*
 graph/*
