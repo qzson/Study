@@ -66,6 +66,7 @@ for i in range(len(model.estimators_)):
         
         select_x_train = selection.transform(x_train)
         selection_model.fit(select_x_train, y_train)
+        print(selection_model.estimators_[i].best_params_)
         
         select_x_test = selection.transform(x_test)
         y_pred = selection_model.predict(select_x_test)
@@ -73,7 +74,6 @@ for i in range(len(model.estimators_)):
         mae = mean_absolute_error(y_test, y_pred)
         score = r2_score(y_test, y_pred)
         print('thresh=%.3f, n=%d, R2: %.2f%%, MAE: %.3f' %(thresh, select_x_train.shape[1], score*100.0, mae))
-        # print(gridcv.best_params_)
 
         select_x_pred = selection.transform(x_pred)
         y_predict = selection_model.predict(select_x_pred)
