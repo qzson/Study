@@ -24,7 +24,7 @@ y_npy = np.load('./data/dacon/comp1/y_train.npy')
 x_pred = np.load('./data/dacon/comp1/x_pred.npy')
 print(x_npy.shape, y_npy.shape, x_pred.shape)   # (10000, 176) (10000, 4) (10000, 176)
 
-x_train, x_test, y_train, y_test = train_test_split(x_npy, y_npy, test_size = 0.2, random_state = 66, shuffle = True)
+x_train, x_test, y_train, y_test = train_test_split(x_npy, y_npy, test_size = 0.2, random_state = 100, shuffle = True)
 print(x_train.shape)        # (8000, 176)
 print(x_test.shape)         # (2000, 176)
 print(y_train.shape)        # (8000, 4)
@@ -55,37 +55,9 @@ model = LGBMRegressor(n_estimators=550,
                       reg_alpha=1,
                       reg_lambda = 1.1,
                       n_jobs=6)
-# 100 / 20 / 30 / 0.05 / 0.5
-# score1 : 72.3023
-# mae1 : 1.1604
-# score2 : 21.5578
-# mae2 : 0.6963
-# score3 : 25.3974
-# mae3 : 2.0771
-# score4 : 17.2373
-# mae4 : 1.3498
 
-# 100 / 20 / 30 / 0.04 / 0.7
-# score1 : 72.2789
-# mae1 : 1.1567
-# score2 : 22.8805
-# mae2 : 0.6918
-# score3 : 26.0999
-# mae3 : 2.0683
-# score4 : 17.5051
-# mae4 : 1.3463
-
-# colsample_bytree=0.7
-# score1 : 89.5936
-# mae1 : 0.6826
-# score2 : 59.9237
-# mae2 : 0.4980
-# score3 : 49.5317
-# mae3 : 1.6976
-# score4 : 34.7322
-# mae4 : 1.1723
-
-# colsample_bytree=0.5 제출파일 kb3
+# 최종 파람 튜닝
+# 제출파일 kb3 (66)
 # score1 : 89.8127
 # mae1 : 0.6707
 # score2 : 60.8751
@@ -94,6 +66,27 @@ model = LGBMRegressor(n_estimators=550,
 # mae3 : 1.6988
 # score4 : 35.3934
 # mae4 : 1.1660
+
+# random = 77
+# score1 : 90.0640
+# mae1 : 0.6765
+# score2 : 58.9822
+# mae2 : 0.4932
+# score3 : 45.4997
+# mae3 : 1.7200
+# score4 : 37.5599
+# mae4 : 1.1514
+
+# random = 100
+# 제출파일 kb5 (100)
+# score1 : 90.0199
+# mae1 : 0.6666
+# score2 : 59.3862
+# mae2 : 0.4902
+# score3 : 47.6782
+# mae3 : 1.6682
+# score4 : 35.4230
+# mae4 : 1.1454
 
 model.fit(x_train, y_train1, verbose=False, eval_metric=['logloss'],
                 eval_set=[(x_test, y_test1)],
@@ -150,4 +143,4 @@ sub = pd.DataFrame({
 print(sub)
 
 ''' 4. 저장 '''
-sub.to_csv('./data/dacon/comp1/KB_lgbm_04.csv', index=False)
+sub.to_csv('./data/dacon/comp1/KB_lgbm_05.csv', index=False)
