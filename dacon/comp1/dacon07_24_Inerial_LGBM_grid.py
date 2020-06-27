@@ -57,7 +57,7 @@ param = {
     'reg_lambda': [1.1],
     'n_jobs': [6]
 }
-search = GridSearchCV(LGBMRegressor(n_jobs=6), param, cv=5, n_jobs=6)
+search = GridSearchCV(LGBMRegressor(n_jobs=6), param, cv=5, n_jobs=6, return_train_score=True)
 
 search.fit(x_train, y_train1, verbose=False, eval_metric=['logloss'],
                 eval_set=[(x_test, y_test1)],
@@ -71,39 +71,43 @@ mae1 = mean_absolute_error(y_test1, y_pred_1)
 print('mae1 : %.4f' %(mae1))
 y_pred1 = search.predict(x_pred)
 
-search.fit(x_train, y_train2, verbose=False, eval_metric=['logloss'],
-                eval_set=[(x_test, y_test2)],
-                early_stopping_rounds=20)
-                
-score2 = search.score(x_test, y_test2)
-print("score2 : %.4f" %(score2 * 100.0))
-# print(model.feature_importances_)
-y_pred_2 = search.predict(x_test)
-mae2 = mean_absolute_error(y_test2, y_pred_2)
-print('mae2 : %.4f' %(mae2))
-y_pred2 = search.predict(x_pred)
 
-# model.fit(x_train, y_train3, verbose=False, eval_metric=['logloss'],
+# search.fit(x_train, y_train2, verbose=False, eval_metric=['logloss'],
+#                 eval_set=[(x_test, y_test2)],
+#                 early_stopping_rounds=20)
+                
+# score2 = search.score(x_test, y_test2)
+# print("score2 : %.4f" %(score2 * 100.0))
+# # print(model.feature_importances_)
+# y_pred_2 = search.predict(x_test)
+# mae2 = mean_absolute_error(y_test2, y_pred_2)
+# print('mae2 : %.4f' %(mae2))
+# y_pred2 = search.predict(x_pred)
+
+
+# search.fit(x_train, y_train3, verbose=False, eval_metric=['logloss'],
 #                 eval_set=[(x_test, y_test3)],
 #                 early_stopping_rounds=20)
-# score3 = model.score(x_test, y_test3)
+
+# score3 = search.score(x_test, y_test3)
 # print("score3 : %.4f" %(score3 * 100.0))
 # # print(model.feature_importances_)
-# y_pred_3 = model.predict(x_test)
+# y_pred_3 = search.predict(x_test)
 # mae3 = mean_absolute_error(y_test3, y_pred_3)
 # print('mae3 : %.4f' %(mae3))
-# y_pred3 = model.predict(x_pred)
+# y_pred3 = search.predict(x_pred)
 
-# model.fit(x_train, y_train4, verbose=False, eval_metric=['logloss'],
+
+# search.fit(x_train, y_train4, verbose=False, eval_metric=['logloss'],
 #                 eval_set=[(x_test, y_test4)],
 #                 early_stopping_rounds=20)
-# score4 = model.score(x_test, y_test4)
+# score4 = search.score(x_test, y_test4)
 # print("score4 : %.4f" %(score4 * 100.0))
 # # print(model.feature_importances_)
-# y_pred_4 = model.predict(x_test)
+# y_pred_4 = search.predict(x_test)
 # mae4 = mean_absolute_error(y_test4, y_pred_4)
 # print('mae4 : %.4f' %(mae4))
-# y_pred4 = model.predict(x_pred)
+# y_pred4 = search.predict(x_pred)
 
 
 # sub = pd.DataFrame({
