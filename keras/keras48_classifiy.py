@@ -24,15 +24,11 @@ print(y.shape)              # (10,)
 
 # 2. 모델
 model = Sequential()
-model.add(Dense(100,activation = 'relu', input_dim = 1))
-model.add(Dense(90,activation = 'relu'))
-model.add(Dense(70,activation = 'relu'))
-model.add(Dense(60,activation = 'relu'))
-model.add(Dense(50,activation = 'relu'))
-model.add(Dense(40,activation = 'relu'))
-model.add(Dense(30,activation = 'relu'))
-model.add(Dense(20,activation = 'relu'))
-model.add(Dense(10,activation = 'relu'))     
+model.add(Dense(256,activation = 'elu', input_dim = 1))
+model.add(Dense(128,activation = 'elu'))
+model.add(Dense(64,activation = 'elu'))
+model.add(Dense(32,activation = 'elu'))
+model.add(Dense(16,activation = 'elu'))
 model.add(Dense(1,activation = 'sigmoid'))
 """ 설명
  - 계산된 함수가 activation을 통해 다음 layer에 넘어간다.
