@@ -9,9 +9,11 @@ from keras.layers import Dense, Conv2D, MaxPooling2D, MaxPool2D, Flatten, BatchN
 from sklearn.model_selection import train_test_split
 from keras.optimizers import Adam
 
+
+#1. data
 (x_train, y_train),(x_test, y_test) = cifar10.load_data()
 
-##### 데이터 전처리 2. 리쉐이프 & 정규화
+# 전처리
 x_train = x_train.reshape(50000, 32, 32, 3).astype('float32')/255
 x_test = x_test.reshape(10000, 32, 32, 3).astype('float32')/255
 
@@ -28,6 +30,7 @@ model.add(Dense(10, activation = 'softmax'))
 
 model.summary()
 
+
 #3. compile, fit
 model.compile(optimizer = Adam(1e-4), loss = 'sparse_categorical_crossentropy', metrics = ['acc'])                             
 hist = model.fit(x_train, y_train, epochs = 20, batch_size = 32, verbose = 1, 
@@ -36,7 +39,6 @@ hist = model.fit(x_train, y_train, epochs = 20, batch_size = 32, verbose = 1,
 
 #4. evaluate
 loss_acc = model.evaluate(x_test, y_test, batch_size = 32)
-# loss_acc:  [0.825190092921257, 0.8418999910354614]
 
 loss = hist.history['loss']
 val_loss = hist.history['val_loss']
@@ -76,3 +78,5 @@ plt.xlabel('epoch')
 plt.legend(['acc', 'val_acc'])
 
 plt.show()
+
+# loss_acc:  [0.825190092921257, 0.8418999910354614]
