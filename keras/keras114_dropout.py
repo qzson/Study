@@ -42,28 +42,29 @@ from keras.regularizers import l1, l2, l1_l2
 
 # kl1 = l1(0.001)
 kl2 = l2(0.001)
+act = 'elu'
 
 model = Sequential()
-model.add(Conv2D(32, kernel_size=3, padding='same', activation='relu', input_shape=(32, 32, 3)))
+model.add(Conv2D(32, kernel_size=3, padding='same', activation=act, input_shape=(32, 32, 3)))
 # model.add(Dropout(0.2))
-model.add(Conv2D(32, kernel_size=3, padding='same', activation='relu'))
+model.add(Conv2D(32, kernel_size=3, padding='same', activation=act))
 model.add(MaxPooling2D(pool_size=(2,2), strides=2, padding='same'))
 model.add(Dropout(0.2))
 
-model.add(Conv2D(64, kernel_size=3, padding='same', activation='relu'))
+model.add(Conv2D(64, kernel_size=3, padding='same', activation=act))
 # model.add(Dropout(0.3))
-model.add(Conv2D(64, kernel_size=3, padding='same', activation='relu'))
+model.add(Conv2D(64, kernel_size=3, padding='same', activation=act))
 model.add(MaxPooling2D(pool_size=(2,2), strides=2, padding='same'))
 model.add(Dropout(0.2))
 
-model.add(Conv2D(128, kernel_size=3, padding='same', activation='relu'))
+model.add(Conv2D(128, kernel_size=3, padding='same', activation=act))
 # model.add(Dropout(0.4))
-model.add(Conv2D(128, kernel_size=3, padding='same', activation='relu'))
+model.add(Conv2D(128, kernel_size=3, padding='same', activation=act))
 model.add(MaxPooling2D(pool_size=(2,2), strides=2, padding='same'))
 model.add(Dropout(0.2))
 
 model.add(Flatten())
-model.add(Dense(256, activation='relu'))
+model.add(Dense(256, activation=act))
 model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax'))
 
@@ -137,5 +138,8 @@ loss, acc 는  [0.8241934020996093, 0.7098000049591064]
 
 # dp 0.2 통일
 loss, acc 는  [0.8025406148910522, 0.7200999855995178]
+
+# elu
+loss, acc 는  [0.701026141500473, 0.7631999850273132]
 
 '''
