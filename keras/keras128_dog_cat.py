@@ -29,7 +29,7 @@ print(arr_dog)
 print(type(arr_dog))                                # <class 'numpy.ndarray'>
 print(arr_dog.shape)                                # (224, 224, 3)
 
-# vgg16 전처리 (그냥 쓰면 문제 있음?) // RGB -> BGR
+# vgg16 전처리 (그냥 쓰면 문제 있음) // RGB -> BGR
 # vgg16에 와꾸대로 잘 넣기 위해서 사용
 from keras.applications.vgg16 import preprocess_input
 
