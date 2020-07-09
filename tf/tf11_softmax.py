@@ -30,7 +30,7 @@ y = tf.placeholder('float', shape=[None, 3])
 
 w = tf.Variable(tf.random_normal([4, 3]), name='weight')    # 행렬 곱 연산 위해 명확히 4,3
 # b = tf.Variable(tf.random_normal([3]), name='bias')         # 벡터 3
-b = tf.Variable(tf.random_normal([1, 3]), name='bias')         # 벡터 3
+b = tf.Variable(tf.random_normal([1, 3]), name='bias')      # 벡터 3
 
 # 2. softmax activation
 hypothesis = tf.nn.softmax(tf.matmul(x, w) + b)
@@ -75,3 +75,6 @@ with tf.Session() as sess:
 
     all = sess.run(hypothesis, feed_dict=allpd)
     print('\n',all, '\n p1 ~ 4 분류 : ', sess.run(tf.argmax(all, 1)))
+    
+    # all2 = sess.run(hypothesis, feed_dict={x: [np.append(p, 0), np.append(p2, 0), np.append(p4, 0)]})
+    # print('\n',all2, '\n p1 ~ 4 분류 : ', sess.run(tf.argmax(all2, 1))) # 이건 뭐냐
