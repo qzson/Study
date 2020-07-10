@@ -108,7 +108,7 @@ print('훈련 끝')
 # 5. predict
 prediction = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(y, 1))
 accuracy = tf.reduce_mean(tf.cast(prediction, tf.float32))
-acc = sess.run(accuracy, feed_dict={x:x_test, y:y_test, keep_prob:1})
+acc = sess.run(accuracy, feed_dict={x:x_test, y:y_test, keep_prob:0.9})
 print(f'Acc : {acc:.2%}')
 sess.close()
 
