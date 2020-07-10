@@ -87,13 +87,16 @@ for epoch in range(training_epochs):        # 15
     avg_cost = 0
 
     for i in range(total_batch):            # 600
-        batch_xs, batch_ys = x_train[i * batch_size : (i+1)*batch_size], y_train[i * batch_size : (i+1)*batch_size]
+        # batch_xs, batch_ys = x_train[i * batch_size : (i+1)*batch_size], y_train[i * batch_size : (i+1)*batch_size]
+        start = i * batch_size
+        end = start + batch_size
+        batch_xs, batch_ys = x_train[start:end], y_train[start:end]
         # batch_xs, batch_ys = next_batch(batch_size, x_train, y_train)
         feed_dict = {x:batch_xs, y:batch_ys, keep_prob:0.8}
         c, _ = sess.run([cost, optimizer], feed_dict=feed_dict)
         avg_cost += c / total_batch
     
-    print('Epoch :', '%04d' % (epoch + 1), 'cost = ', '{:.9f}'.format(avg_cost))
+    print('Epoch :', '%04d' % (epoch + 1), 'Cost : {:.9f}'.format(avg_cost))
 print('훈련 끝')
 
 prediction = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(y,1))
