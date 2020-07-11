@@ -4,6 +4,16 @@ import numpy as np
 from tqdm import tqdm
 # import jovian
 import numpy as np
+import keras.backend as K
+import matplotlib.pyplot as plt
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Activation, Conv2D, Flatten,MaxPooling2D,BatchNormalization,Lambda, AveragePooling2D
+import keras.backend as K
+from keras.callbacks import ModelCheckpoint
+from keras.models import load_model
+import pandas as pd
+# from keras.activations import mish
 
 def kaeri_metric(y_true, y_pred):
     '''
@@ -45,15 +55,7 @@ def E2(y_true, y_pred):
     return np.mean(np.sum(np.square((_t - _p) / (_t + 1e-06)), axis = 1))
 
 # import matplotlib as plt
-import matplotlib.pyplot as plt
 
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Conv2D, Flatten,MaxPooling2D,BatchNormalization,Lambda, AveragePooling2D
-import keras.backend as K
-from keras.callbacks import ModelCheckpoint
-from keras.models import load_model
-import pandas as pd
 
 # X_data = []
 # Y_data = []
@@ -67,12 +69,14 @@ Y_data = np.loadtxt('./data/dacon/comp3/train_target.csv',skiprows=1,delimiter='
 Y_data = Y_data[:,1:]
 print(Y_data.shape)
 
+
 X_data = X_data.reshape((2800,375,5,1))
 print(X_data.shape)
 
 X_data_test = np.loadtxt('./data/dacon/comp3/test_features.csv',skiprows=1,delimiter=',')
 X_data_test = X_data_test[:,1:]
 X_data_test = X_data_test.reshape((700,375,5,1))
+
 
 data_id = 2
 
@@ -121,43 +125,58 @@ def my_loss_E2(y_true, y_pred):
 def set_model(train_target):  # 0:x,y, 1:m, 2:v
     
     activation = 'elu'
+
     padding = 'valid'
     model = Sequential()
     nf = 19
     fs = (3,1)
 
-    model.add(Conv2D(nf,fs, padding=padding, activation=activation,input_shape=(375,5,1)))
-    model.add(BatchNormalization())
+    model.add(Conv2D(nf,fs, activation = activation,padding=padding,input_shape=(375,5,1)))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
-    model.add(Conv2D(nf*2,fs, padding=padding, activation=activation))
-    model.add(BatchNormalization())
+
+    model.add(Conv2D(nf*2,fs, padding=padding, activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
-    model.add(Conv2D(nf*4,fs, padding=padding, activation=activation))
-    model.add(BatchNormalization())
+
+    model.add(Conv2D(nf*4,fs, padding=padding, activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
-    model.add(Conv2D(nf*8,fs, padding=padding, activation=activation))
-    model.add(BatchNormalization())
+
+    model.add(Conv2D(nf*8,fs, padding=padding, activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
-    model.add(Conv2D(nf*16,fs, padding=padding, activation=activation))
-    model.add(BatchNormalization())
+
+    model.add(Conv2D(nf*16,fs, padding=padding, activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
-    model.add(Conv2D(nf*32,fs, padding=padding, activation=activation))
-    model.add(BatchNormalization())
+    model.add(Conv2D(nf*32,fs, padding=padding, activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
+    model.add(MaxPooling2D(pool_size=(2, 1)))
+
+
+    model.add(Conv2D(nf*64,fs, padding='same', activation = activation))
+    model.add(BatchNormalization(momentum = 0.991))
     model.add(MaxPooling2D(pool_size=(2, 1)))
 
     model.add(Flatten())
-    model.add(Dense(256, activation ='elu'))
-    model.add(Dense(128, activation ='elu'))
-    model.add(Dense(64, activation ='elu'))
-    model.add(Dense(32, activation ='elu'))
-    model.add(Dense(16, activation ='elu'))
-    model.add(Dense(8, activation ='elu'))
-
+    model.add(Dense(256))
+    model.add(Activation(activation))
+    model.add(Dense(128))
+    model.add(Activation(activation))
+    model.add(Dense(64))
+    model.add(Activation(activation))
+    model.add(Dense(32))
+    model.add(Activation(activation))
+    model.add(Dense(16))
+    model.add(Activation(activation))
+    model.add(Dense(8))
+    model.add(Activation(activation))
     model.add(Dense(4))
 
     optimizer = keras.optimizers.Adam()
@@ -191,8 +210,8 @@ def train(model,X,Y):
 
 
     history = model.fit(X, Y,
-                  epochs=125,
-                  batch_size=128,
+                  epochs=200,
+                  batch_size=200,
                   shuffle=True,
                   validation_split=0.2,
                   verbose = 2,
@@ -264,14 +283,14 @@ def load_best_model(train_target):
         model = load_model('best_m.hdf5' , custom_objects={'my_loss_E2': my_loss, })
 
     score = model.evaluate(X_data, Y_data, verbose=0)
-    print('loss:', score)
+    print('loss:', '{:.5f}'.format(score))
 
     pred = model.predict(X_data)
 
     i=0
 
-    print('정답(original):', Y_data[i])
-    print('예측값(original):', pred[i])
+    # print('정답(original):', Y_data[i])
+    # print('예측값(original):', pred[i])
 
     print(E1(pred, Y_data))
     print(E2(pred, Y_data))
@@ -308,14 +327,29 @@ for train_target in range(3):
     elif train_target == 2: # v 학습
         submit.iloc[:,4] = pred_data_test[:,3]
 
-submit.to_csv('./data/dacon/comp3/KB_comp3_sub6.csv', index = False)
+submit.to_csv('./data/dacon/comp3/KB_comp3_sub21.csv', index = False)
 
-# loss: 41641356554.24
-# 정답(original): [   0.  -400.    50.     0.4]
-# 예측값(original): [ 0.43083692 -0.21319413  3.9947855   0.39584178]
-# 6.650168658420014
-# 569.1400164413221
-# (2800, 4)
-# 1.544112716743931
-# 10.261211792627975
-# -6.560271978378301
+# <dense : 256~ 8 / 175 / 200
+# 1
+# loss: 357821940425.87427
+# 0.0008400765274319728
+# 2.9278141141595486
+# 1.9160863300233857
+# 18.569962412893776
+# 0.068888884963727
+
+# 2
+# loss: 492584691043251.94
+# 7.541833882315603
+# 0.9872385169412635
+# 1.297613293836466
+# 4.56243896484375
+# -6.201263427734375
+
+# 3
+# loss: 111413229924.93715
+# 6.650196817776164
+# 58405.78550171884
+# 2.110827731937798
+# 9.719946980476374
+# -7.645910978317266
