@@ -27,9 +27,6 @@ print(x_train.shape, x_test.shape)                              # (50000, 32, 32
 print(y_train.shape, y_test.shape)                              # (50000, 10) (10000, 10)
 
 # 1-3. pre_model_params
-x_shape = 32, 32, 3
-lr = 0.001
-
 x = tf.placeholder(tf.float32, shape=[None, 32, 32, 3])
 y = tf.placeholder(tf.float32, shape=[None, 10])
 keep_prob = tf.placeholder(tf.float32)                          # dropout
@@ -43,19 +40,19 @@ l1 = tf.nn.selu(l1)
 l1 = tf.nn.max_pool(l1, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
 print(l1)                                                       # (?, 16, 16, 32)
 
-w2 = tf.get_variable('w2', shape=[2, 2, 32, 64])                # [ksize, ksize, input, output]
+w2 = tf.get_variable('w2', shape=[3, 3, 32, 64])                # [ksize, ksize, input, output]
 l2 = tf.nn.conv2d(l1, w2, strides=[1,1,1,1], padding='SAME')
 l2 = tf.nn.selu(l2)
 l2 = tf.nn.max_pool(l2, [1,2,2,1], [1,2,2,1], padding='SAME')
 print(l2)                                                       # (?, 8, 8, 64)
 
-w3 = tf.get_variable('w3', shape=[2, 2, 64, 128])
+w3 = tf.get_variable('w3', shape=[3, 3, 64, 128])
 l3 = tf.nn.conv2d(l2, w3, strides=[1,1,1,1], padding='SAME')
 l3 = tf.nn.selu(l3)
 l3 = tf.nn.max_pool(l3, [1,2,2,1], [1,2,2,1], padding='SAME')
 print(l3)                                                       # (?, 4, 4, 128)
 
-w4 = tf.get_variable('w4', shape=[2, 2, 128, 64])
+w4 = tf.get_variable('w4', shape=[3, 3, 128, 64])
 l4 = tf.nn.conv2d(l3, w4, strides=[1,1,1,1], padding='SAME')
 l4 = tf.nn.selu(l4)
 l4 = tf.nn.max_pool(l4, [1,2,2,1], [1,2,2,1], padding='SAME')
@@ -79,6 +76,7 @@ hypothesis = tf.nn.softmax(tf.matmul(dl2, dw3) + b3)
 
 
 # 3. compile
+lr = 0.001
 cost = tf.reduce_mean(-tf.reduce_sum(y * tf.log(hypothesis), axis = 1)) # cross_entropy
 optimizer = tf.train.AdamOptimizer(learning_rate=lr).minimize(cost)
 
@@ -113,4 +111,4 @@ acc = sess.run(accuracy, feed_dict={x:x_test, y:y_test, keep_prob:0.9})
 print(f'Acc : {acc:.2%}')
 sess.close()
 
-# Acc : 98.87%
+# Acc : 67.88%
