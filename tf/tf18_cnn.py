@@ -98,7 +98,7 @@ for epoch in range(training_epochs):
         end = start + batch_size
 
         batch_xs, batch_ys = x_train[start : end], y_train[start : end]
-        c, _ = sess.run([cost, optimizer], feed_dict={x : batch_xs, y : batch_ys, keep_prob : 0.9}) # 1-keep_prob : 만큼 dropout
+        c, _ = sess.run([cost, optimizer], feed_dict={x : batch_xs, y : batch_ys, keep_prob : 0.9}) # (1 - keep_prob) : 만큼 dropout
         avg_cost += c / total_batch
 
     print('Epoch :', '%02d' %(epoch + 1), 'Cost : {:.5f}'.format(avg_cost))
