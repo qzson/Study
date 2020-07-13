@@ -4,11 +4,7 @@
 from flask import Flask, Response, make_response
 app = Flask(__name__)
 
-@app.route('/')
-def response_test():
-    custom_response = Response('Custom Response', 200, {'Program' : 'Flask Web Application'})
-    print('★')
-    return make_response(custom_response)
+
 
 @app.before_first_request
 def before_first_request():
@@ -17,6 +13,12 @@ def before_first_request():
 @app.before_request
 def before_request():
     print('[2] 매 HTTP 요청이 처리되기 전에 실행됩니다.')
+
+@app.route('/')
+def response_test():
+    custom_response = Response('Custom Response', 200, {'Program' : 'Flask Web Application'})
+    print('★')
+    return make_response(custom_response)
 
 @app.after_request
 def after_request(response):
