@@ -96,7 +96,7 @@ plt.legend(loc=1)
 from sklearn.model_selection import train_test_split
 
 
-X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.0)
+X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.01)
 # X_train = X_data
 # Y_train = Y_data
 print(X_train.shape)
@@ -149,15 +149,15 @@ def set_model(train_target):  # 0:x,y, 1:m, 2:v
     model.add(Conv2D(nf*32,fs, padding=padding, activation=activation))
     model.add(BatchNormalization())
     model.add(MaxPooling2D(pool_size=(2, 1)))
-    model.add(Dropout(0.5))
+    model.add(Dropout(0.2))
 
     model.add(Flatten())
+    model.add(Dense(512, activation ='elu'))
     model.add(Dense(256, activation ='elu'))
     model.add(Dense(128, activation ='elu'))
     model.add(Dense(64, activation ='elu'))
     model.add(Dense(32, activation ='elu'))
     model.add(Dense(16, activation ='elu'))
-    model.add(Dense(8, activation ='elu'))
     model.add(Dense(4))
 
     optimizer = keras.optimizers.Adam()
@@ -191,7 +191,7 @@ def train(model,X,Y):
 
 
     history = model.fit(X, Y,
-                  epochs=150,
+                  epochs=200,
                   batch_size=256,
                   shuffle=True,
                   validation_split=0.2,
@@ -264,7 +264,8 @@ def load_best_model(train_target):
         model = load_model('best_m.hdf5' , custom_objects={'my_loss_E2': my_loss, })
 
     score = model.evaluate(X_data, Y_data, verbose=0)
-    print('loss:', score)
+    # print('loss:', score)
+    print(f'loss: {score:.5f}')
 
     pred = model.predict(X_data)
 
@@ -308,7 +309,7 @@ for train_target in range(3):
     elif train_target == 2: # v 학습
         submit.iloc[:,4] = pred_data_test[:,3]
 
-submit.to_csv('./data/dacon/comp3/KB_comp3_sub17.csv', index = False)
+submit.to_csv('./data/dacon/comp3/KB_comp3_sub20.csv', index = False)
 
 ## 256 ~ 16 // 150 // 256 // sub16
 # # 1
@@ -332,3 +333,26 @@ submit.to_csv('./data/dacon/comp3/KB_comp3_sub17.csv', index = False)
 # 2.486535020073572
 # 13.238275051116949
 # -14.852237701416016
+
+## 256 ~ 16 // 200 // 256 // sub18
+# # 1
+# loss: 231568616009.14285
+# 0.0012531970916835188
+# 1.9884199456657754
+# 2.469331853616243
+# 35.220679680472145
+# 0.16337500725452814
+# # 2
+# loss: 200095417215034.5
+# 7.069208338635406
+# 1.053435939268656
+# 1.2946794946342255
+# 3.5031127929687504
+# -7.030386788504464
+# # 3
+# loss: 433881263870.5372
+# 6.65131700207676
+# 4063158812.1301284
+# 0.8800090545217245
+# 4.517005383968348
+# -3.6920890212059074
