@@ -13,3 +13,5 @@
 *.json
 data/*
 graph/*
+django/*
+*.db
