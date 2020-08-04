@@ -44,7 +44,7 @@ with tf.device('/cpu:0'):
 
     model.fit(x, y, epochs=3, batch_size=16) 
 
-    model.save('my_model.h5')
+    # model.save('my_model.h5')
 
 end = datetime.datetime.now()
 time_delta = end - start
